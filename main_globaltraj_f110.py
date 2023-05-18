@@ -24,8 +24,7 @@ Documentation:
 This script has to be executed to generate an optimal trajectory based on a given reference track. Adapted for
 F1TENTH ROS code.
 """
-# MAP_NAME = "e7_floor5_large"
-MAP_NAME = "Hockenheim_map"
+MAP_NAME = "Budapest_map"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # USER INPUT -----------------------------------------------------------------------------------------------------------
@@ -40,7 +39,7 @@ plot_opts = {"mincurv_curv_lin": False,         # plot curv. linearization (orig
              "raceline": True,                  # plot optimized path
              "imported_bounds": False,          # plot imported bounds (analyze difference to interpolated bounds)
              "raceline_curv": False,             # plot curvature profile of optimized path
-             "racetraj_vel": True,              # plot velocity profile
+             "racetraj_vel": False,              # plot velocity profile
              "racetraj_vel_3d": True,          # plot 3D velocity profile above raceline
              "racetraj_vel_3d_stepsize": 0.5,   # [m] vertical lines stepsize in 3D velocity profile plot
              "spline_normals": False,           # plot spline normals to check for crossings
