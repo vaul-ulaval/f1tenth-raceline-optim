@@ -27,14 +27,19 @@ Lots of the required functions for trajectory planning are cumulated in our traj
 can be found on https://github.com/TUMFTM/trajectory_planning_helpers. They can be quite useful for other projects as
 well.
 
-# Dependencies
+# Installation
+
+Clone this repo and cd into it
 
 ```bash
-conda create --name raceline
-conda activate raceline
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.7-venv python3.7-dev
+python3.7 -m venv ./.venv
+source ./.venv/bin/activate # Always execute this before working with the raceline generation!
+python --version # Make sure you have python 3.7
 pip install -r requirements.txt
 ```
-
 
 ### Steps
 Consult https://stevengong.co/notes/Raceline-Optimization.
