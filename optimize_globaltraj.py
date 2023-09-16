@@ -67,7 +67,7 @@ lap_time_mat_opts = {"use_lap_time_mat": False,             # calculate a lap ti
                      "file": "lap_time_matrix.csv"}         # file name of the lap time matrix (stored in "outputs")
 
 
-def launch_globaltraj_optimization(track_path: str, vehicle_param_file_name: str, opt_type: str):
+def launch_globaltraj_optimization(track_path: str, output_path: str, vehicle_param_file_name: str, opt_type: str):
     # opt_type:
     #   'shortest_path'       shortest path optimization
     #   'mincurv'             minimum curvature optimization without iterative call
@@ -147,8 +147,7 @@ def launch_globaltraj_optimization(track_path: str, vehicle_param_file_name: str
     # assemble export paths
     file_paths["mintime_export"] = os.path.join(
         file_paths["module"], f"outputs/{track_name}", f"mintime-{TIME}")
-    file_paths["traj_race_export"] = os.path.join(
-        file_paths["module"], f"outputs/{track_name}", f"traj_race_cl-{TIME}.csv")
+    file_paths["traj_race_export"] = output_path
     # file_paths["traj_ltpl_export"] = os.path.join(file_paths["module"], "outputs", "traj_ltpl_cl.csv")
     file_paths["lap_time_mat_export"] = os.path.join(
         file_paths["module"], f"outputs/{track_name}", lap_time_mat_opts["file"])

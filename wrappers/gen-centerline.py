@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser(
 
 parser.add_argument('--map-path', required=True,
                     help='Path to the .pgm map file')
-parser.add_argument('--output-file', required=False, default="",
+parser.add_argument('--output-file', required=False, default='',
                     help='By default, it will put the centerline csv at the same path as the image, but you can put another output path')
 parser.add_argument('--thresold', required=False, type=float, default=0.5,
                     help='This is the value used to filter out after the euclidian filter. Play with it if you see "hairy" lines in the graph')
@@ -36,8 +36,6 @@ is_debug: bool = args.debug
 should_reverse_centerline: bool = args.reverse
 thresold: float = args.thresold
 output_path: str = args.output_file
-if output_path == "":
-    output_path = f"{file_name}.csv"
 
 # Validating arguments
 if not os.path.isfile(map_path):
@@ -49,6 +47,9 @@ elif not map_path.endswith('.pgm'):
 elif not os.path.isfile(map_yaml_path):
     print('Error! The map file must have a .yaml with the same name')
     sys.exit(-1)
+
+if output_path == '':
+    output_path = f"{file_name}.csv"
 
 # Reading yaml file
 with open(map_yaml_path, 'r') as yaml_stream:

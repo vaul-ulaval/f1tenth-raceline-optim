@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(
     description='This is a wrapper program to help generate racelines from centerlines generated with the "gen-centerline" wrapper')
 parser.add_argument('--track-path', required=True,
                     help='Path to the .csv file generated with the gen-centerline utility')
+parser.add_argument('--output-path', default='', required=False, help='By default, the output path will be the same directory as the track-path')
 parser.add_argument(
     '--optim-type', choices=['shortest_path', 'mincurv', 'mincurv_iqp', 'mintime'], default='mintime', help='''
     shortest_path: Shortest path optimization
@@ -22,8 +23,8 @@ parser.add_argument(
 ''')
 args = parser.parse_args()
 
-
 track_path: str = args.track_path
+output_path: str = args.output_path
 optim_type: str = args.optim_type
 
 # Argument validation
@@ -34,4 +35,7 @@ if not track_path.endswith('.csv'):
     print('Error! track file must be a .csv file generated with the "gen-centerline" wrapper')
     sys.exit(-1)
 
-optimize_globaltraj.launch_globaltraj_optimization(track_path, 'f110.ini', optim_type)
+if output_path == '':
+    output_path = f'{track_path.replace(".csv", "")}.raceline'
+
+optimize_globaltraj.launch_globaltraj_optimization(track_path, output_path, 'f110.ini', optim_type)
