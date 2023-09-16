@@ -99,18 +99,18 @@ def launch_globaltraj_optimization(track_path: str, output_path: str, vehicle_pa
     file_paths["module"] = os.path.dirname(os.path.abspath(__file__))
 
     # read dependencies from requirements.txt
-    requirements_path = os.path.join(file_paths["module"], 'requirements.txt')
-    dependencies = []
+    #requirements_path = os.path.join(file_paths["module"], 'requirements.txt')
+    #dependencies = []
 
-    with open(requirements_path, 'r') as fh:
-        line = fh.readline()
-
-        while line:
-            dependencies.append(line.rstrip())
-            line = fh.readline()
-
-    # check dependencies
-    pkg_resources.require(dependencies)
+    #with open(requirements_path, 'r') as fh:
+    #     line = fh.readline()
+    #
+    #     while line:
+    #         dependencies.append(line.rstrip())
+    #         line = fh.readline()
+    #
+    # # check dependencies
+    # pkg_resources.require(dependencies)
 
     # ----------------------------------------------------------------------------------------------------------------------
     # INITIALIZATION OF PATHS ----------------------------------------------------------------------------------------------
