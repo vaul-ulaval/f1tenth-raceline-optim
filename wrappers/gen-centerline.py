@@ -7,7 +7,6 @@ from skimage.morphology import skeletonize
 import matplotlib.pyplot as plt
 import yaml
 import scipy
-from scipy.ndimage import distance_transform_edt as edt
 from PIL import Image
 import os
 import pandas as pd
