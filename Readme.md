@@ -34,7 +34,7 @@ Clone this repo and cd into it
 ```bash
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
-sudo apt install python3.7-venv python3.7-dev
+sudo apt install python3.7-venv python3.7-dev python3.7-tk
 python3.7 -m venv ./.venv
 source ./.venv/bin/activate # Always execute this before working with the raceline generation!
 python --version # Make sure you have python 3.7
