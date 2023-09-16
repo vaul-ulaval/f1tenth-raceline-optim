@@ -38,7 +38,8 @@ sudo apt install python3.7-venv python3.7-dev python3.7-tk
 python3.7 -m venv ./.venv
 source ./.venv/bin/activate # Always execute this before working with the raceline generation!
 python --version # Make sure you have python 3.7
-pip install -r requirements.txt
+pip install -r requirements.txt #The package conflict with quadprog is absolutely normal
+pip install --upgrade quadprog
 ```
 
 ### Steps
