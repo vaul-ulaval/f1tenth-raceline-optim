@@ -235,8 +235,16 @@ y -= orig_y
 x /= map_resolution
 y /= map_resolution
 
+
+
 plt.figure(figsize=(10, 10))
 plt.imshow(map_img, cmap="gray", origin="lower")
 plt.plot(x, y)
+
+# Add an arrow to indicate direction
+arrow_start = centerline_points[0]
+arrow_end = centerline_points[10]  # You can adjust this index
+plt.arrow(arrow_start[0], arrow_start[1], arrow_end[0] - arrow_start[0], arrow_end[1] - arrow_start[1],
+          head_width=5, head_length=5, fc='red', ec='red')
 plt.title('Final centerline on the binary scale map')
 plt.show()
