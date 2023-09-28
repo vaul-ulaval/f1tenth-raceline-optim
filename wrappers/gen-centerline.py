@@ -21,6 +21,8 @@ parser.add_argument('--output-file', required=False, default='',
                     help='By default, it will put the centerline csv at the same path as the image, but you can put another output path')
 parser.add_argument('--thresold', required=False, type=float, default=0.5,
                     help='This is the value used to filter out after the euclidian filter. Play with it if you see "hairy" lines in the graph')
+parser.add_argument('--safety-margin', required=False, type=float, default=0.0,
+                    help='This is the value used to filter out after the euclidian filter. Play with it if you see "hairy" lines in the graph')
 parser.add_argument(
     '--debug', action='store_true', required=False, help='With debug on, it will print graphs for every step of the generation')
 parser.add_argument('--reverse', action='store_true', required=False, default=False,
@@ -36,6 +38,7 @@ is_debug: bool = args.debug
 should_reverse_centerline: bool = args.reverse
 thresold: float = args.thresold
 output_path: str = args.output_file
+safety_margin: float = args.safety_margin
 
 # Validating arguments
 if not os.path.isfile(map_path):
@@ -214,6 +217,9 @@ transformed_data = data
 transformed_data *= map_resolution
 transformed_data += np.array([orig_x, orig_y, 0, 0])
 
+# Safety margin
+transformed_data -= np.array([0, 0, safety_margin, safety_margin])
+
 print(f'Output generated succesfully to {output_path}')
 with open(output_path, 'wb') as fh:
     np.savetxt(fh, transformed_data, fmt='%0.4f', delimiter=',',
@@ -234,7 +240,6 @@ y -= orig_y
 
 x /= map_resolution
 y /= map_resolution
-
 
 
 plt.figure(figsize=(10, 10))

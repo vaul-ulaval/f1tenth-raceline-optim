@@ -38,4 +38,7 @@ if not track_path.endswith('.csv'):
 if output_path == '':
     output_path = f'{track_path.replace(".csv", "")}.raceline'
 
+if os.path.exists(output_path):
+    os.remove(output_path)
+
 optimize_globaltraj.launch_globaltraj_optimization(track_path, output_path, 'f110.ini', optim_type)
