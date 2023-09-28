@@ -82,7 +82,7 @@ def export_traj_ltpl(file_paths: dict,
     header = "x_ref_m; y_ref_m; width_right_m; width_left_m; x_normvec_m; y_normvec_m; " \
              "alpha_m; s_racetraj_m; psi_racetraj_rad; kappa_racetraj_radpm; vx_racetraj_mps; ax_racetraj_mps2"
     fmt = "%.7f; %.7f; %.7f; %.7f; %.7f; %.7f; %.7f; %.7f; %.7f; %.7f; %.7f; %.7f"
-    with open(file_paths["traj_ltpl_export"], 'ab') as fh:
+    with open(file_paths["traj_ltpl_export"], 'b') as fh:
         np.savetxt(fh, traj_ltpl, fmt=fmt, header=header)
 
 
