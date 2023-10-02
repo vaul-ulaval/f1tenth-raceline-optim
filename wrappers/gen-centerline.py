@@ -220,6 +220,9 @@ transformed_data += np.array([orig_x, orig_y, 0, 0])
 # Safety margin
 transformed_data -= np.array([0, 0, safety_margin, safety_margin])
 
+if os.path.exists(output_path):
+    os.remove(output_path)
+
 print(f'Output generated succesfully to {output_path}')
 with open(output_path, 'wb') as fh:
     np.savetxt(fh, transformed_data, fmt='%0.4f', delimiter=',',
