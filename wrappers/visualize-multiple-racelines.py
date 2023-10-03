@@ -8,8 +8,8 @@ import argparse
 
 map_path = "/mnt/nas/maps/iros.pgm"
 racelines_paths = [
-    "/mnt/nas/maps/nl.raceline",
-    "/mnt/nas/maps/jmf.raceline",
+    "/mnt/nas/maps/current.raceline",
+    "/mnt/nas/maps/wf.raceline",
 ]
 
 
