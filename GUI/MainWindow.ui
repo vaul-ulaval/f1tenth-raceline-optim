@@ -78,7 +78,7 @@
        <number>100</number>
       </property>
       <property name="singleStep">
-       <number>10</number>
+       <number>1</number>
       </property>
       <property name="pageStep">
        <number>10</number>
@@ -125,7 +125,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>50</string>
+       <string>0.5</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -213,22 +213,5 @@
   </action>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>thresholdSlider</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>thresholdValue</receiver>
-   <slot>setNum(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>701</x>
-     <y>218</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>812</x>
-     <y>218</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
