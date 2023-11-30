@@ -4,23 +4,33 @@ import csv
 import yaml
 
 from ui_mainwindow import Ui_MainWindow
+from CompareTab import CompareTab
+from Workspace import Workspace
 
-from PySide6.QtWidgets import QMainWindow, QPushButton, QFileDialog, QGraphicsScene, QGraphicsPixmapItem, QGraphicsView
+from PySide6.QtWidgets import QMainWindow, QPushButton, QFileDialog, QGraphicsScene, QGraphicsPixmapItem, QVBoxLayout
 from PySide6.QtGui import QImage, QPixmap
 
 from gen_centerline import gen_centerline, display_centerline
 
 
 class MainWindow(QMainWindow):
+    _compare_tab = None
+    _centerline_tab = None
+    _workspace = None
 
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # self.form_widget = QCheckBox(self)
-        # print(self)
-        # self.tabs.compare.setCentralWidget(self.form_widget)
+        self._workspace = Workspace()
+        self._workspace.loadRacelines()
+
+        _compare_tab = CompareTab(self._workspace)
+        compare_tab_layout = QVBoxLayout()
+        compare_tab_layout.addWidget(_compare_tab)
+        self.ui.Compare.setLayout(compare_tab_layout)
+
 
 
         
@@ -69,7 +79,7 @@ class MainWindow(QMainWindow):
         self.ui.SaveCenterLineButton.setEnabled(True)
 
     def save_centerline(self):
-        file_name, _ = QFileDialog.getSaveFileName(self, 'Save file', '../racetracks/centerlines', "CSV files (*.csv)")
+        file_name, _ = QFileDialog.getSaveFileName(self, 'Save file', '/racetracks/centerlines', "CSV files (*.csv)")
         header = ['x_m', 'y_m', 'w_tr_right_m', 'w_tr_left_m']
 
         with open(f"{str(file_name)}.csv", 'w', newline="") as file:
