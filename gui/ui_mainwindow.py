@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'MainWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.4
+## Created by: Qt User Interface Compiler version 6.5.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -16,62 +16,39 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QGraphicsView, QLabel,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QSizePolicy, QSlider, QStatusBar, QTabWidget,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QMainWindow, QMenu,
+    QMenuBar, QPushButton, QSizePolicy, QSpacerItem,
+    QStatusBar, QTabWidget, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(907, 670)
+        MainWindow.resize(728, 389)
         self.actionLoadMap = QAction(MainWindow)
         self.actionLoadMap.setObjectName(u"actionLoadMap")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout_4 = QHBoxLayout()
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.loadWorkspace = QPushButton(self.centralwidget)
+        self.loadWorkspace.setObjectName(u"loadWorkspace")
+
+        self.horizontalLayout_4.addWidget(self.loadWorkspace)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
+
         self.Tabs = QTabWidget(self.centralwidget)
         self.Tabs.setObjectName(u"Tabs")
-        self.Tabs.setGeometry(QRect(0, 0, 911, 631))
         self.Centerline = QWidget()
         self.Centerline.setObjectName(u"Centerline")
-        self.loadMapButton = QPushButton(self.Centerline)
-        self.loadMapButton.setObjectName(u"loadMapButton")
-        self.loadMapButton.setGeometry(QRect(60, 20, 101, 31))
-        self.loadMapButton.setToolTipDuration(-1)
-        self.SaveCenterLineButton = QPushButton(self.Centerline)
-        self.SaveCenterLineButton.setObjectName(u"SaveCenterLineButton")
-        self.SaveCenterLineButton.setGeometry(QRect(200, 20, 161, 31))
-        self.thresholdSlider = QSlider(self.Centerline)
-        self.thresholdSlider.setObjectName(u"thresholdSlider")
-        self.thresholdSlider.setGeometry(QRect(690, 190, 160, 16))
-        self.thresholdSlider.setMinimum(0)
-        self.thresholdSlider.setMaximum(100)
-        self.thresholdSlider.setSingleStep(10)
-        self.thresholdSlider.setPageStep(10)
-        self.thresholdSlider.setValue(50)
-        self.thresholdSlider.setSliderPosition(50)
-        self.thresholdSlider.setTracking(True)
-        self.thresholdSlider.setOrientation(Qt.Horizontal)
-        self.thresholdSlider.setTickPosition(QSlider.TicksBothSides)
-        self.thresholdSlider.setTickInterval(10)
-        self.thresholdLabel = QLabel(self.Centerline)
-        self.thresholdLabel.setObjectName(u"thresholdLabel")
-        self.thresholdLabel.setGeometry(QRect(740, 170, 71, 16))
-        self.thresholdValue = QLabel(self.Centerline)
-        self.thresholdValue.setObjectName(u"thresholdValue")
-        self.thresholdValue.setGeometry(QRect(850, 190, 41, 16))
-        self.thresholdValue.setAlignment(Qt.AlignCenter)
-        self.reverseCheckBox = QCheckBox(self.Centerline)
-        self.reverseCheckBox.setObjectName(u"reverseCheckBox")
-        self.reverseCheckBox.setGeometry(QRect(730, 120, 91, 21))
-        self.reverseCheckBox.setIconSize(QSize(20, 20))
-        self.centerLineView = QGraphicsView(self.Centerline)
-        self.centerLineView.setObjectName(u"centerLineView")
-        self.centerLineView.setGeometry(QRect(10, 70, 661, 521))
-        self.genCenterlineButton = QPushButton(self.Centerline)
-        self.genCenterlineButton.setObjectName(u"genCenterlineButton")
-        self.genCenterlineButton.setGeometry(QRect(710, 240, 121, 25))
         self.Tabs.addTab(self.Centerline, "")
         self.Raceline = QWidget()
         self.Raceline.setObjectName(u"Raceline")
@@ -79,10 +56,13 @@ class Ui_MainWindow(object):
         self.Compare = QWidget()
         self.Compare.setObjectName(u"Compare")
         self.Tabs.addTab(self.Compare, "")
+
+        self.verticalLayout.addWidget(self.Tabs)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 907, 22))
+        self.menubar.setGeometry(QRect(0, 0, 728, 22))
         self.menuHello = QMenu(self.menubar)
         self.menuHello.setObjectName(u"menuHello")
         MainWindow.setMenuBar(self.menubar)
@@ -93,7 +73,6 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHello.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.thresholdSlider.valueChanged.connect(self.thresholdValue.setNum)
 
         self.Tabs.setCurrentIndex(0)
 
@@ -107,15 +86,7 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(tooltip)
         self.actionLoadMap.setToolTip(QCoreApplication.translate("MainWindow", u"Click here to load a .pgm file", None))
 #endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(tooltip)
-        self.loadMapButton.setToolTip("")
-#endif // QT_CONFIG(tooltip)
-        self.loadMapButton.setText(QCoreApplication.translate("MainWindow", u"Load map...", None))
-        self.SaveCenterLineButton.setText(QCoreApplication.translate("MainWindow", u"Save centerline ...", None))
-        self.thresholdLabel.setText(QCoreApplication.translate("MainWindow", u"Threshold", None))
-        self.thresholdValue.setText(QCoreApplication.translate("MainWindow", u"50", None))
-        self.reverseCheckBox.setText(QCoreApplication.translate("MainWindow", u"Reverse", None))
-        self.genCenterlineButton.setText(QCoreApplication.translate("MainWindow", u"Generate", None))
+        self.loadWorkspace.setText(QCoreApplication.translate("MainWindow", u"Load workspace...", None))
         self.Tabs.setTabText(self.Tabs.indexOf(self.Centerline), QCoreApplication.translate("MainWindow", u"Centerline", None))
         self.Tabs.setTabText(self.Tabs.indexOf(self.Raceline), QCoreApplication.translate("MainWindow", u"Raceline", None))
         self.Tabs.setTabText(self.Tabs.indexOf(self.Compare), QCoreApplication.translate("MainWindow", u"Compare", None))
