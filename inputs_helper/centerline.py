@@ -75,7 +75,9 @@ def write_centerline_csv(csv_file_path: str, centerline: RealCenterline):
 
     with open(csv_file_path, 'w') as csv_stream:
         csv_stream.write('x_m,y_m,w_tr_right_m,w_tr_left_m\n')
-        for x, y, w_right, w_left in zip(centerline.waypoints, centerline.track_widths):
+        for i in range(len(centerline.waypoints)):
+            x, y = centerline.waypoints[i]
+            w_right, w_left = centerline.track_widths[i]
             csv_stream.write(f"{x},{y},{w_right},{w_left}\n")
 
 
@@ -86,7 +88,7 @@ def gen_centerline_from_img(map_img: np.ndarray, thresold: float, should_reverse
     img_copy[map_img > 210.] = 1
 
     # Calculate Euclidean Distance Transform (tells us distance to nearest wall)
-    dist_transform: np.ndarray = scipy.ndimage.distance_transform_edt(map_img)
+    dist_transform: np.ndarray = scipy.ndimage.distance_transform_edt(img_copy)
 
     # Threshold the distance transform to create a binary image
     centers: np.ndarray = dist_transform > thresold * dist_transform.max()
@@ -129,13 +131,16 @@ def gen_centerline_from_img(map_img: np.ndarray, thresold: float, should_reverse
         centerline_points.append(np.array(point))
 
         track_width = centerline_dist[y][x]
-        track_widths.append(np.array(track_width, track_width))
+        track_widths.append((track_width, track_width))
 
         for dx, dy in DIRECTIONS:
             candidate_point = x + dx, y + dy
             candidate_x, candidate_y = candidate_point
-            candidate_dist = centerline_dist[candidate_y][candidate_x]
+            if (candidate_x < 0 or candidate_x >= centerline_dist.shape[1] or
+                candidate_y < 0 or candidate_y >= centerline_dist.shape[0]):
+                continue
 
+            candidate_dist = centerline_dist[candidate_y][candidate_x]
             if (candidate_dist != NON_EDGE and candidate_point not in visited):
                 dfs(candidate_point)
 
@@ -149,8 +154,8 @@ def gen_centerline_from_img(map_img: np.ndarray, thresold: float, should_reverse
 
 
 def convert_centerline_to_real(centerline: ImageCenterline, yaml_content: MapYamlContent) -> RealCenterline:
-    waypoints_np = np.array(centerline.waypoints)
-    track_widths_np = np.array(centerline.track_widths)
+    waypoints_np = np.array(centerline.waypoints, dtype=np.float64)
+    track_widths_np = np.array(centerline.track_widths, dtype=np.float64)
 
     # Calculate map parameters
     orig_x, orig_y, _ = yaml_content.origin

@@ -1,18 +1,9 @@
-import sys
-import os
-import csv
-import yaml
+from .ui_mainwindow import Ui_MainWindow
+from .generate_centerline_tab import GenerateCenterlineTab
+from .compare_tab import CompareTab
+from .workspace import Workspace
 
-from ui_mainwindow import Ui_MainWindow
-
-from generate_centerline_tab import GenerateCenterlineTab
-from compare_tab import CompareTab
-from workspace import Workspace
-
-from PySide6.QtWidgets import QMainWindow, QPushButton, QFileDialog, QGraphicsScene, QGraphicsPixmapItem, QVBoxLayout
-from PySide6.QtGui import QImage, QPixmap
-
-
+from PySide6.QtWidgets import QMainWindow, QFileDialog, QVBoxLayout
 
 class MainWindow(QMainWindow):
     _compare_tab : CompareTab

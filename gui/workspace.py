@@ -1,6 +1,7 @@
 import glob
 import yaml
-from objects import Raceline, Map, Centerline
+from inputs_helper.centerline import ImageCenterline, convert_centerline_to_real, read_map_yaml, write_centerline_csv
+from .objects import Raceline, Map, Centerline
 import random
 import csv
 
@@ -49,16 +50,13 @@ class Workspace():
 
                     self._maps.append(Map(name, image_path, resolution, origin))
     
-    def save_centerline(self, name, data):
-        header = ['x_m', 'y_m', 'w_tr_right_m', 'w_tr_left_m']
-        file_path = self.PATH + "/centerlines/" + name + ".csv"
-        with open(file_path, 'w', newline="") as file:
-            csv_writer = csv.writer(file)
-
-            csv_writer.writerow(header)
-            for row in data:
-                round_row = [round(elem, 3) for elem in row]
-                csv_writer.writerow(round_row)
+    def save_centerline(self, name: str, img_centerline: ImageCenterline):
+        csv_path = self.PATH + "/centerlines/" + name + ".csv"
+        yaml_path = self.PATH + "/maps/" + name + ".yaml"
+        
+        map_yaml = read_map_yaml(yaml_path)
+        real_centerline = convert_centerline_to_real(img_centerline, map_yaml)
+        write_centerline_csv(csv_path, real_centerline)
 
                     
     
