@@ -1,4 +1,4 @@
-from MainWindow import MainWindow
+from main_window import MainWindow
 
 from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QPalette, QColor
@@ -33,8 +33,8 @@ def main():
     app = QApplication(sys.argv)
     set_palette(app)
 
-    mainWindow = MainWindow()
-    mainWindow.show()
+    main_window = MainWindow()
+    main_window.show()
     sys.exit(app.exec())
 
 if __name__ == "__main__":

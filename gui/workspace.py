@@ -11,15 +11,15 @@ class Workspace():
 
     PATH : str
 
-    def __init__(self, workspaccePath):
-        self.PATH = workspaccePath
-        self.loadRacelines()
-        self.loadMaps()
+    def __init__(self, workspace_path : str):
+        self.PATH = workspace_path
+        self.load_racelines()
+        self.load_maps()
         # self.loadCenterlines()
         
 
 
-    def loadRacelines(self):
+    def load_racelines(self):
         self._racelines = []
         racelines = glob.glob(self.PATH + "/racelines/*")
         for raceline in racelines:
@@ -32,9 +32,9 @@ class Workspace():
                         x, y, _, _ = line.split(",")
                         xs.append(float(x))
                         ys.append(float(y))   
-                    self._racelines.append(Raceline(name, self.generateColor(), xs, ys))
+                    self._racelines.append(Raceline(name, self.generate_color(), xs, ys))
     
-    def loadMaps(self):
+    def load_maps(self):
         self._maps = []
         maps = glob.glob(self.PATH + "/maps/*")
         for map in maps:
@@ -49,7 +49,7 @@ class Workspace():
 
                     self._maps.append(Map(name, image_path, resolution, origin))
     
-    def saveCenterline(self, name, data):
+    def save_centerline(self, name, data):
         header = ['x_m', 'y_m', 'w_tr_right_m', 'w_tr_left_m']
         file_path = self.PATH + "/centerlines/" + name + ".csv"
         with open(file_path, 'w', newline="") as file:
@@ -62,20 +62,20 @@ class Workspace():
 
                     
     
-    def generateColor(self):
+    def generate_color(self):
         return "#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
 
-    def getCenterlines(self):
+    def get_centerlines(self):
         return self._centerlines
     
-    def getMaps(self):
+    def get_maps(self):
         return self._maps
     
-    def getMap(self, map_name : str) -> Map:
+    def get_map(self, map_name : str) -> Map:
         for map in self._maps:
             if map.name == map_name:
                 return map
 
     
-    def getRacelines(self):
+    def get_racelines(self):
         return self._racelines

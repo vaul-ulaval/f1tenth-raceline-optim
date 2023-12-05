@@ -5,7 +5,7 @@ from PySide6.QtWidgets import QDialog, QGraphicsScene, QGraphicsPixmapItem, QApp
 from PySide6.QtGui import QPixmap, QColor
 from PySide6.QtCore import Qt
 
-from Workspace import Workspace
+from workspace import Workspace
 
 
 class CompareTab(QDialog):
@@ -17,11 +17,11 @@ class CompareTab(QDialog):
         self.ui.setupUi(self)
 
     
-    def setWorkspace(self, workspace):
+    def set_workspace(self, workspace):
         self.ui.listWidget.clear()
         self._workspace = workspace
         
-        for raceline in self._workspace.getRacelines():
+        for raceline in self._workspace.get_racelines():
             item = QListWidgetItem()
             item.setText(raceline.name)
 

@@ -8,7 +8,7 @@ class Origin:
 @dataclass
 class Map:
     name: str
-    imagePath: str
+    image_path: str
     resolution: float
     origin: Origin
 
