@@ -3,6 +3,7 @@ import yaml
 from objects import Raceline, Map, Centerline
 import random
 import csv
+import pandas as pd
 
 class Workspace():
     _centerlines = []
@@ -15,7 +16,7 @@ class Workspace():
         self.PATH = workspace_path
         self.load_racelines()
         self.load_maps()
-        # self.loadCenterlines()
+        self.load_centerlines()
         
 
 
@@ -32,7 +33,7 @@ class Workspace():
                         x, y, _, _ = line.split(",")
                         xs.append(float(x))
                         ys.append(float(y))   
-                    self._racelines.append(Raceline(name, self.generate_color(), xs, ys))
+                    self._racelines.append(Raceline(name, "race_f1tenth_icra_2023_short.yaml", self.generate_color(), xs, ys))
     
     def load_maps(self):
         self._maps = []
@@ -48,6 +49,21 @@ class Workspace():
                     image_path = self.PATH + "/maps/" + image_name
 
                     self._maps.append(Map(name, image_path, resolution, origin))
+    
+    def load_centerlines(self):
+        self._centerlines = []
+        centerlines = glob.glob(self.PATH + "/centerlines/*")
+            
+        for centerline in centerlines:
+            name = centerline.split("/")[-1]
+            raw_data = pd.read_csv(centerline)
+            xs = raw_data["x_m"].values
+            ys = raw_data["y_m"].values
+            width_right = raw_data["w_tr_right_m"].values
+            width_left = raw_data["w_tr_left_m"].values
+
+            self._centerlines.append(Centerline(name, xs, ys, width_right, width_left))            
+
     
     def save_centerline(self, name, data):
         header = ['x_m', 'y_m', 'w_tr_right_m', 'w_tr_left_m']
@@ -76,6 +92,10 @@ class Workspace():
             if map.name == map_name:
                 return map
 
+    def get_centerline(self, centerline_name : str) -> Centerline:
+        for centerline in self._centerlines:
+            if centerline.name == centerline_name:
+                return centerline
     
     def get_racelines(self):
         return self._racelines
