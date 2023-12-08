@@ -1,15 +1,13 @@
-import sys
-from ui_comparetab import Ui_CompareTab
+from .ui_comparetab import Ui_CompareTab
 
 from PySide6.QtWidgets import QDialog, QGraphicsScene, QGraphicsPixmapItem, QApplication, QListWidgetItem
 from PySide6.QtGui import QPixmap, QColor, QImage
 from PySide6.QtCore import Qt
 import matplotlib.pyplot as plt
 
-from workspace import Workspace
+from .workspace import Workspace
 import numpy as np
 from PIL import Image
-
 
 class CompareTab(QDialog):
     _workspace : Workspace

@@ -1,18 +1,9 @@
-import sys
-import os
-import csv
-import yaml
+from .ui_mainwindow import Ui_MainWindow
+from .generate_centerline_tab import GenerateCenterlineTab
+from .compare_tab import CompareTab
+from .workspace import Workspace
 
-from ui_mainwindow import Ui_MainWindow
-
-from generate_centerline_tab import GenerateCenterlineTab
-from compare_tab import CompareTab
-from workspace import Workspace
-
-from PySide6.QtWidgets import QMainWindow, QPushButton, QFileDialog, QGraphicsScene, QGraphicsPixmapItem, QVBoxLayout
-from PySide6.QtGui import QImage, QPixmap
-
-
+from PySide6.QtWidgets import QMainWindow, QFileDialog, QVBoxLayout
 
 class MainWindow(QMainWindow):
     _compare_tab : CompareTab
@@ -31,7 +22,7 @@ class MainWindow(QMainWindow):
         self.show()
 
     def load_workspace(self):
-        path = QFileDialog.getExistingDirectory(self, 'Open file', '../racetracks', QFileDialog.ShowDirsOnly)
+        path = QFileDialog.getExistingDirectory(self, 'Open file', './racetracks', QFileDialog.ShowDirsOnly)
         self._workspace = Workspace(path)
         self._compare_tab.set_workspace(self._workspace)
         self._centerline_tab.set_workspace(self._workspace)

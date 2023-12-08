@@ -1,8 +1,8 @@
 import glob
 import yaml
-from objects import Raceline, Map, Centerline
+from inputs_helper.centerline import ImageCenterline, convert_centerline_to_real, read_map_yaml, write_centerline_csv
+from .objects import Raceline, Map, Centerline
 import random
-import csv
 import pandas as pd
 
 class Workspace():
@@ -49,7 +49,7 @@ class Workspace():
                     image_path = self.PATH + "/maps/" + image_name
 
                     self._maps.append(Map(name, image_path, resolution, origin))
-    
+
     def load_centerlines(self):
         self._centerlines = []
         centerlines = glob.glob(self.PATH + "/centerlines/*")
@@ -63,20 +63,14 @@ class Workspace():
             width_left = raw_data["w_tr_left_m"].values
 
             self._centerlines.append(Centerline(name, xs, ys, width_right, width_left))            
-
     
-    def save_centerline(self, name, data):
-        header = ['x_m', 'y_m', 'w_tr_right_m', 'w_tr_left_m']
-        file_path = self.PATH + "/centerlines/" + name + ".csv"
-        with open(file_path, 'w', newline="") as file:
-            csv_writer = csv.writer(file)
-
-            csv_writer.writerow(header)
-            for row in data:
-                round_row = [round(elem, 3) for elem in row]
-                csv_writer.writerow(round_row)
-
-                    
+    def save_centerline(self, name: str, img_centerline: ImageCenterline):
+        csv_path = self.PATH + "/centerlines/" + name + ".csv"
+        yaml_path = self.PATH + "/maps/" + name + ".yaml"
+        
+        map_yaml = read_map_yaml(yaml_path)
+        real_centerline = convert_centerline_to_real(img_centerline, map_yaml)
+        write_centerline_csv(csv_path, real_centerline)
     
     def generate_color(self):
         return "#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])

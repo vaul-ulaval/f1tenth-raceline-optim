@@ -1,10 +1,10 @@
-from main_window import MainWindow
 
 from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtCore import Qt
 import sys
-import PySide6
+
+from gui.main_window import MainWindow
 
 def set_palette(app):
     app.setStyle("Fusion")
